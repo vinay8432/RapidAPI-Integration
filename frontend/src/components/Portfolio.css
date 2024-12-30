@@ -1,0 +1,68 @@
+.portfolio-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logout-button {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #e04143;
+  }
+  
+  .add-mutual-fund {
+    margin-bottom: 20px;
+  }
+  
+  .add-mutual-fund label {
+    font-weight: bold;
+  }
+  
+  .fund-family, .scheme-selection {
+    margin-top: 10px;
+  }
+  
+  .add-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .add-button:hover {
+    background-color: #45a049;
+  }
+  
+  .investments ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .investments li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
