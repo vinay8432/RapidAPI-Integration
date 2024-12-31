@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+const dotenv = require('dotenv')
+dotenv.config()
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -10,7 +11,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post('https://rapid-backend.vercel.app/api/auth/login', { email, password });
       localStorage.setItem('token', response.data.token); // Store token
       navigate('/portfolio'); // Redirect to portfolio
     } catch (error) {

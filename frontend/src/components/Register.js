@@ -8,7 +8,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { email, password });
+      await axios.post('https://rapid-backend.vercel.app/api/auth/register', { email, password });
       alert('Registration successful! Please login.');
     } catch (error) {
       alert('Registration failed!');
