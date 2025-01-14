@@ -22,7 +22,7 @@ const Portfolio = () => {
         navigate('/login'); // Redirect to login if no token
         return;
       }
-      const response = await axios.get('http://rapid-api-integration-backend.vercel.app/api/portfolio', {
+      const response = await axios.get('https://rapid-api-integration-backend.vercel.app/api/portfolio', {
         headers: { Authorization: `Bearer ${token}` },
       });
   
@@ -46,7 +46,7 @@ const Portfolio = () => {
         navigate('/login'); // Redirect to login if no token
         return;
       }
-      const response = await axios.get('http://rapid-api-integration-backend.vercel.app/api/funds/fund-families', {
+      const response = await axios.get('https://rapid-api-integration-backend.vercel.app/api/funds/fund-families', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFundFamilies(response.data.fundFamilies);
@@ -62,7 +62,7 @@ const Portfolio = () => {
         navigate('/login'); // Redirect to login if no token
         return;
       }
-      const response = await axios.get(`http://rapid-api-integration-backend.vercel.app/api/funds/funds?family=${family}`, {
+      const response = await axios.get(`https://rapid-api-integration-backend.vercel.app/api/funds/funds?family=${family}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSchemes(response.data.funds);
@@ -79,7 +79,7 @@ const Portfolio = () => {
         return;
       }
       await axios.post(
-        'http://rapid-api-integration-backend.vercel.app/api/portfolio/add',
+        'https://rapid-api-integration-backend.vercel.app/api/portfolio/add',
         { schemeName: selectedScheme, nav, units },
         {
           headers: { Authorization: `Bearer ${token}` },
