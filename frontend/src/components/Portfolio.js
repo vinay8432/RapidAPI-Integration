@@ -1,4 +1,4 @@
-// Updated Portfolio.js with Improved CSS Styling
+// Updated Portfolio.js with Improved Handling for New Users
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -25,10 +25,15 @@ const Portfolio = () => {
       const response = await axios.get('http://localhost:5000/api/portfolio', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("response",response)
-      setPortfolio(response.data.investments);
-      setUserName(response.data.userName); // Assuming backend returns userName
+  
+      // Safely access investments and default to an empty array
+      const investments = Array.isArray(response.data?.investments) ? response.data.investments : [];
+      const name = response.data?.userName || ''; // Default to an empty string
+  
+      setPortfolio(investments);
+      setUserName(name);
     } catch (error) {
+      console.error('Error fetching portfolio:', error);
       alert('Failed to fetch portfolio!');
       navigate('/login'); // Redirect to login on error
     }
@@ -162,13 +167,17 @@ const Portfolio = () => {
 
       <section className="investments">
         <h3>Your Investments</h3>
-        <ul>
-          {portfolio.map((investment, index) => (
-            <li key={index}>
-              {investment.fundName} - Units: {investment.units} - Current Value: {investment.currentValue} - Purchase Value: {investment.purchasePrice}
-            </li>
-          ))}
-        </ul>
+        {Array.isArray(portfolio) && portfolio.length > 0 ? (
+          <ul>
+            {portfolio.map((investment, index) => (
+              <li key={index}>
+                {investment.fundName} - Units: {investment.units} - Current Value: {investment.currentValue} - Purchase Value: {investment.purchasePrice}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No investments found. Start by adding a mutual fund to your portfolio!</p>
+        )}
       </section>
     </div>
   );

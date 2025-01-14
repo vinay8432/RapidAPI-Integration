@@ -9,7 +9,7 @@ exports.getPortfolio = async (req, res) => {
     const portfolio = await Portfolio.findOne({ userId: _id });
 
     if (!portfolio) {
-      return res.status(404).json({ error: 'Portfolio not found' });
+      return res.status(200).json({ userId: _id, investments: 'Not yet invested' });
     }
 
     res.status(200).json(portfolio);
