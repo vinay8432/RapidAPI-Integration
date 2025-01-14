@@ -1,4 +1,5 @@
 const axios = require('axios');
+const MutualFund = require('../models/MutualFundModel');
 
 // RapidAPI base URL and headers
 const rapidAPIBaseURL = 'https://latest-mutual-fund-nav.p.rapidapi.com';
@@ -25,27 +26,26 @@ const fetchOpenEndedFunds = async () => {
     throw new Error('Unable to fetch open-ended funds');
   }
 };
-const fetchAllFunds = async () => {
-  try {
-    const response = await axios.get(`${rapidAPIBaseURL}/latest`, {
-      headers: rapidAPIHeaders,
-      params: { Scheme_Type: 'Open' }, // Use Scheme_Type if applicable
-    });
+// const fetchAllFunds = async () => {
+//   try {
+//     const response = await axios.get(`${rapidAPIBaseURL}/latest`, {
+//       headers: rapidAPIHeaders,
+//       params: { Scheme_Type: 'Open' }, // Use Scheme_Type if applicable
+//     });
 
-    if (response.data && response.data.length > 0) {
-      return response.data; // Return all funds
-    } else {
-      throw new Error('No funds available');
-    }
-  } catch (error) {
-    console.error('Error fetching funds:', error.response?.data || error.message);
-    throw new Error('Unable to fetch funds');
-  }
-};
+//     if (response.data && response.data.length > 0) {
+//       return response.data; // Return all funds
+//     } else {
+//       throw new Error('No funds available');
+//     }
+//   } catch (error) {
+//     console.error('Error fetching funds:', error.response?.data || error.message);
+//     throw new Error('Unable to fetch funds');
+//   }
+// };
 const fetchMutualFundFamilies = async () => {
   try {
-    const funds = await fetchAllFunds(); // Fetch all funds
-    const fundFamilies = [...new Set(funds.map(fund => fund.Mutual_Fund_Family))]; // Get unique families
+    const fundFamilies = await MutualFund.distinct('Mutual_Fund_Family');// Get unique families
     return fundFamilies;
   } catch (error) {
     console.error('Error fetching mutual fund families:', error.message);

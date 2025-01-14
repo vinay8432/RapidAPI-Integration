@@ -1,4 +1,5 @@
 const { fetchOpenEndedFunds, fetchMutualFundFamilies } = require('../utils/rapidAPI');
+const MutualFund = require('../models/MutualFundModel')
 
 // Fetch Open-Ended Funds by Fund Family
 exports.getFundsByFamily = async (req, res) => {
@@ -8,12 +9,11 @@ exports.getFundsByFamily = async (req, res) => {
       return res.status(400).json({ error: 'Mutual fund family is required' });
     }
 
-    const funds = await fetchOpenEndedFunds(); // Fetch all open-ended funds
-    const filteredFunds = funds.filter(
-      (fund) =>
-        fund['Mutual_Fund_Family'] === family &&
-        fund['Scheme_Type'] === 'Open Ended Schemes'
-    );
+    const filteredFunds = await MutualFund.find({
+      Mutual_Fund_Family: family,
+      Scheme_Type: 'Open Ended Schemes'
+    });
+    
 
     if (filteredFunds.length === 0) {
       return res.status(404).json({ message: 'No funds found for this family' });
